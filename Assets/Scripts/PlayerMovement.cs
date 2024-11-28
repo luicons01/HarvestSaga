@@ -1,51 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f; // Velocità di movimento
-    public float rotationSpeed = 200f; // Velocità di rotazione
-    public float gravity = -9.81f; // Gravità
-    public CharacterController controller;
+    public Animator animator; // Riferimento all'Animator
+    public float speed = 5f;  // Velocità di movimento
+    public float gravity = -9.8f; // Gravità
+    public float jumpHeight = 2f; // Altezza del salto
+    public float rotationSpeed = 0.5f; // Velocità di rotazione
 
+    private CharacterController controller; // Riferimento al CharacterController
+    private Vector3 moveDirection;
     private Vector3 velocity;
 
     void Start()
     {
-        // Trova automaticamente il CharacterController se non è assegnato
-        if (controller == null)
-        {
-            controller = GetComponent<CharacterController>();
-        }
+        controller = GetComponent<CharacterController>(); // Ottieni il CharacterController
     }
 
     void Update()
     {
-        // Input per il movimento avanti/indietro e laterale
-        float moveForward = Input.GetAxis("Vertical"); // W/S o frecce su/giù
-        float moveSide = Input.GetAxis("Horizontal"); // A/D o frecce sinistra/destra
+        // Ottieni i movimenti orizzontali e verticali
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Vertical");
 
-        // Input per la rotazione sinistra/destra (usa l'asse orizzontale)
         float rotate = Input.GetAxis("Horizontal");
-
-        // Movimento del personaggio avanti/indietro
-        Vector3 move = transform.forward * moveForward;
+        // Calcola il vettore di movimento
+        Vector3 move = transform.forward * moveY;
+        // Applica il movimento orizzontale
         controller.Move(move * speed * Time.deltaTime);
 
-        // Rotazione del personaggio
-        transform.Rotate(0, rotate * rotationSpeed * Time.deltaTime, 0);
+       /* if (move.magnitude > 0.1f) // Se c'è movimento
+        {
+            // Calcola la rotazione target nella direzione del movimento
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            // Ruota gradualmente verso la direzione del movimento
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }*/
 
-        // Applicazione della gravità
+        // Rotazione del personaggio
+        transform.Rotate(0, rotate * rotationSpeed * Time.deltaTime, 0); 
+        
+        // Gestione della gravità
         if (!controller.isGrounded)
         {
             velocity.y += gravity * Time.deltaTime;
         }
         else
         {
-            velocity.y = 0; // Resetta la velocità verticale se a terra
+            velocity.y = 0; // Mantieni il personaggio ancorato al terreno
         }
 
+
         controller.Move(velocity * Time.deltaTime);
+
+        // Gestione delle animazioni
+        animator.SetBool("isWalking", move.magnitude > 0.1f);
+
+        // Animazione attacco (quando premi la barra spaziatrice)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("attack");
+        }
     }
 }
