@@ -5,11 +5,9 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator; // Riferimento all'Animator
     public float speed = 5f;  // Velocità di movimento
     public float gravity = -9.8f; // Gravità
-    public float jumpHeight = 2f; // Altezza del salto
     public float rotationSpeed = 0.5f; // Velocità di rotazione
 
     private CharacterController controller; // Riferimento al CharacterController
-    private Vector3 moveDirection;
     private Vector3 velocity;
 
     void Start()
