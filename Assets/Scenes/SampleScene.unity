@@ -1603,15 +1603,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 569972679}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &71649946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 71649945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &74164417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1296584630}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &77522616
 PrefabInstance:
@@ -3088,6 +3101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03
       objectReference: {fileID: 0}
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
@@ -3268,6 +3285,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5502710733676655503, guid: ff4399c5c516b6145b031f40e03b2334, type: 3}
   m_PrefabInstance: {fileID: 234740851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &237908498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1254104538}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &240409852
 PrefabInstance:
@@ -3667,10 +3689,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 408480313}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &271732579 stripped
 Transform:
@@ -3851,15 +3881,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1958753002}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &274333049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 274333048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &275352418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1172579896}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &288648723
 PrefabInstance:
@@ -5582,10 +5625,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1113641957}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &402399886 stripped
 Transform:
@@ -5764,6 +5815,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3610065709873551529, guid: 9a32147e38101fd48876749fd208348d, type: 3}
   m_PrefabInstance: {fileID: 404017635}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &408480312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 271732578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &408480313
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408480312}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &413729126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8600,10 +8677,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1433701706}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &557226670 stripped
 Transform:
@@ -8830,6 +8915,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3610065709873551529, guid: 9a32147e38101fd48876749fd208348d, type: 3}
   m_PrefabInstance: {fileID: 560560716}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &569972678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 71649945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &569972679
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569972678}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &588560743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9205,6 +9316,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4682952893640444, guid: f274f0fb5e5bc294ca9a0ff4cf1f0ff7, type: 3}
   m_PrefabInstance: {fileID: 600183655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &601645152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1970611156}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &614524708
 PrefabInstance:
@@ -10484,13 +10600,52 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -111666871101441764, guid: aede26595ab727a4d8128f7ddfc53788, type: 3}
+--- !u!114 &683716317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683716312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08385ed94fa5d8948882f4723de7200d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &683716318
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683716312}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &696633686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12441,10 +12596,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 978337911}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &802606780 stripped
 Transform:
@@ -12955,10 +13118,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2116869512}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &812625734 stripped
 Transform:
@@ -14814,12 +14985,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &895743341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15944,10 +16115,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1889981963}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &962882974 stripped
 Transform:
@@ -16390,6 +16569,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3610065709873551529, guid: 9a32147e38101fd48876749fd208348d, type: 3}
   m_PrefabInstance: {fileID: 973045946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &978337910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 802606779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &978337911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978337910}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &983831171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18902,6 +19107,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3610065709873551529, guid: 9a32147e38101fd48876749fd208348d, type: 3}
   m_PrefabInstance: {fileID: 1112665630}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1113641956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 402399885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1113641957
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113641956}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1115594398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19764,6 +19995,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3914423556611701228, guid: 0002f1bdebdb83e4cb81269763fe4b2f, type: 3}
   m_PrefabInstance: {fileID: 1154420852}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1154967653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1930602476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1160324043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20180,16 +20416,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1172579898}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1172579897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 1172579896}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1172579898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275352418}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1182658379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21042,7 +21307,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 830ae497fbf37461aa73d5e33c4721e4, type: 2}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.93
+      value: -10.65
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21050,7 +21315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.37
+      value: 9.44
       objectReference: {fileID: 0}
     - target: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21123,6 +21388,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3321336162974859035, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 683716316}
+    - targetCorrespondingSourceObject: {fileID: 3321336162974859035, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 683716317}
+    - targetCorrespondingSourceObject: {fileID: 3321336162974859035, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 683716318}
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1 &1245161127
 GameObject:
@@ -21465,16 +21736,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254104540}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1254104539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 1254104538}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1254104540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237908498}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1254339935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21905,16 +22205,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1296584632}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1296584631 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 1296584630}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1296584632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74164417}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1300571026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22151,10 +22480,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838330599}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1301094941 stripped
 Transform:
@@ -24363,6 +24700,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3610065709873551529, guid: 9a32147e38101fd48876749fd208348d, type: 3}
   m_PrefabInstance: {fileID: 1429683431}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1433701705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 557226669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1433701706
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433701705}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1435649860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30873,6 +31236,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3914423556611701228, guid: 0002f1bdebdb83e4cb81269763fe4b2f, type: 3}
   m_PrefabInstance: {fileID: 1837946870}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1838330598 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 1301094940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1838330599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838330598}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1840483909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31300,6 +31689,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 515144151564686627, guid: f82ec2f7ccf833540947ba343a46f303, type: 3}
   m_PrefabInstance: {fileID: 1887993137}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1889981962 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 962882973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1889981963
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889981962}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1892187992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31737,16 +32152,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1930602478}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1930602477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 1930602476}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1930602478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154967653}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1933724326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32093,6 +32537,32 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1958753001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 274333048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1958753002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958753001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1960775451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32282,7 +32752,6 @@ MonoBehaviour:
   animator: {fileID: 1960988451}
   speed: 5
   gravity: -9.8
-  jumpHeight: 2
   rotationSpeed: 200
 --- !u!1001 &1963233482
 PrefabInstance:
@@ -32516,20 +32985,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2551823551300514674, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
     - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
       propertyPath: m_Name
       value: IL3DN_Plant_Grass_03 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      propertyPath: m_TagString
+      value: Grano
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3994980785413604190, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1970611158}
   m_SourcePrefab: {fileID: 100100000, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
 --- !u!4 &1970611157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30544356680541109, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
   m_PrefabInstance: {fileID: 1970611156}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1970611158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601645152}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!4 &1975048470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4682952893640444, guid: f274f0fb5e5bc294ca9a0ff4cf1f0ff7, type: 3}
@@ -34371,6 +34873,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 515144151564686627, guid: f82ec2f7ccf833540947ba343a46f303, type: 3}
   m_PrefabInstance: {fileID: 2115615853}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2116869511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5726233754395843129, guid: 3ed64830e8f834546a4581c03d58911b, type: 3}
+  m_PrefabInstance: {fileID: 812625733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2116869512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116869511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &2119637054
 PrefabInstance:
   m_ObjectHideFlags: 0
