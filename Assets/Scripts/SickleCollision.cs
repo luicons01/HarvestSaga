@@ -10,7 +10,20 @@ public class SickleCollision : MonoBehaviour
         if (other.CompareTag("Grano"))
         {
             Debug.Log("Il falcetto ha colpito il grano!");
-            // Puoi aggiungere altro comportamento qui se necessario
+
+            // Ottieni il riferimento allo script Wheat
+            Wheat wheat = other.GetComponent<Wheat>();
+            
+            if (wheat != null)
+            {
+                // Chiama la funzione Harvest
+                int harvestedAmount = wheat.Harvest();
+                Debug.Log($"Il falcetto ha colpito il grano! Raccolto: {harvestedAmount}");
+            }
+            else
+            {
+                Debug.LogError("Lo script Wheat non è presente sull'oggetto con tag 'Grano'!");
+            }
         }
     }
 }
