@@ -38,8 +38,6 @@ public class Wheat : MonoBehaviour
         {
             Debug.Log($"Trovati {wheatMaterials.Count} materiali nei figli del grano.");
         }
-
-        
     }
 
 

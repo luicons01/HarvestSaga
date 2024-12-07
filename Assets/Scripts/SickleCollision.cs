@@ -19,6 +19,9 @@ public class SickleCollision : MonoBehaviour
                 // Chiama la funzione Harvest
                 int harvestedAmount = wheat.Harvest();
                 Debug.Log($"Il falcetto ha colpito il grano! Raccolto: {harvestedAmount}");
+
+                // Reset dopo 2 secondi (puoi cambiare il tempo o usare un altro trigger)
+                StartCoroutine(ResetAfterTime(wheat, 2f));
             }
             else
             {
@@ -26,4 +29,16 @@ public class SickleCollision : MonoBehaviour
             }
         }
     }
+
+    // Coroutines per il reset (la usiamo come debug)
+    private IEnumerator ResetAfterTime(Wheat wheat, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Esegui il reset
+        wheat.ResetWheat();
+        Debug.Log("Grano e collider sono stati ripristinati!");
+    }
+
+
 }
