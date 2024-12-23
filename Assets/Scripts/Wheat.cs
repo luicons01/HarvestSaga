@@ -30,16 +30,7 @@ public class Wheat : MonoBehaviour
             wheatMaterials.Add(meshRenderer.material);
         }
 
-        if (wheatMaterials.Count == 0)
-        {
-            Debug.LogError("Nessun MeshRenderer o materiale trovato nei figli del grano!");
-        }
-        else
-        {
-            Debug.Log($"Trovati {wheatMaterials.Count} materiali nei figli del grano.");
-        }
     }
-
 
     /// <summary>
     /// Mietere il grano

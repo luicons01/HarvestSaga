@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SickleCollision : MonoBehaviour
 {
+
+    // Contatore globale per il grano raccolto
+    private int totalHarvestedWheat = 0;
+
     private void OnTriggerEnter(Collider other)
     {
         // Controlla se l'oggetto colpito ha il tag "Grano"
@@ -18,10 +22,12 @@ public class SickleCollision : MonoBehaviour
             {
                 // Chiama la funzione Harvest
                 int harvestedAmount = wheat.Harvest();
-                Debug.Log($"Il falcetto ha colpito il grano! Raccolto: {harvestedAmount}");
+                totalHarvestedWheat += harvestedAmount; // Aggiorna il contatore
+                Debug.Log($"Il falcetto ha colpito il grano!");
+                Debug.Log($"Totale grano raccolto: {totalHarvestedWheat}");
 
-                // Reset dopo 2 secondi (puoi cambiare il tempo o usare un altro trigger)
-                StartCoroutine(ResetAfterTime(wheat, 2f));
+                // Reset dopo 5 secondi (puoi cambiare il tempo o usare un altro trigger)
+                StartCoroutine(ResetAfterTime(wheat, 5f));
             }
             else
             {
@@ -39,6 +45,5 @@ public class SickleCollision : MonoBehaviour
         wheat.ResetWheat();
         Debug.Log("Grano e collider sono stati ripristinati!");
     }
-
 
 }
