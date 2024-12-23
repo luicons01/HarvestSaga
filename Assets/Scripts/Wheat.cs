@@ -12,7 +12,29 @@ public class Wheat : MonoBehaviour
     /// Il Collider trigger che rappresenta il grano
     /// </summary>
     [HideInInspector]
-     public Collider wheatCollider;
+    public Collider wheatCollider;
+
+    /// <summary>
+    /// Un vettore che punta diritto fuori dal grano
+    /// </summary>
+    public Vector3 WheatUpVector
+    {
+        get
+        {
+            return wheatCollider.transform.up;
+        }
+    }
+
+    /// <summary>
+    /// Il centro del collider del grano
+    /// </summary>
+    public Vector3 WheatCenterPosition
+    {
+        get
+        {
+            return wheatCollider.transform.position;
+        }
+    }
 
     private List<Material> wheatMaterials = new List<Material>();
 

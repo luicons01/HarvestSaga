@@ -27,7 +27,7 @@ public class SickleCollision : MonoBehaviour
                 Debug.Log($"Totale grano raccolto: {totalHarvestedWheat}");
 
                 // Reset dopo 5 secondi (puoi cambiare il tempo o usare un altro trigger)
-                StartCoroutine(ResetAfterTime(wheat, 5f));
+                // StartCoroutine(ResetAfterTime(wheat, 5f));
             }
             else
             {
@@ -35,6 +35,12 @@ public class SickleCollision : MonoBehaviour
             }
         }
     }
+
+    public int GetHarvestedWheatCount()
+    {
+        return totalHarvestedWheat;
+    }
+
 
     // Coroutines per il reset (la usiamo come debug)
     private IEnumerator ResetAfterTime(Wheat wheat, float delay)
