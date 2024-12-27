@@ -56,7 +56,7 @@ public class HarvestArea : MonoBehaviour
                 wheatColliderDictionary[wheatCollider] = wheat;
             }
         }
-        DebugHarvestArea();
+        //DebugHarvestArea();
     }
 
 

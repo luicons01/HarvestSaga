@@ -51,7 +51,6 @@ public class Wheat : MonoBehaviour
         {
             wheatMaterials.Add(meshRenderer.material);
         }
-
     }
 
     /// <summary>
@@ -63,7 +62,6 @@ public class Wheat : MonoBehaviour
         //Disattiva il grano ed il suo collider
         wheatCollider.gameObject.SetActive(false);
         gameObject.SetActive(false);
-
         return 1;
     }
 
@@ -74,7 +72,6 @@ public class Wheat : MonoBehaviour
 
         wheatCollider.gameObject.SetActive(true);
         gameObject.SetActive(true);
-
     }
 
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SickleCollision : MonoBehaviour
 {
-
     // Contatore globale per il grano raccolto
     private int totalHarvestedWheat = 0;
 
@@ -40,7 +39,6 @@ public class SickleCollision : MonoBehaviour
     {
         return totalHarvestedWheat;
     }
-
 
     // Coroutines per il reset (la usiamo come debug)
     private IEnumerator ResetAfterTime(Wheat wheat, float delay)
