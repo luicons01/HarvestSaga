@@ -21,6 +21,14 @@ public class FarmerAgent : Agent
 
     // L'area di mietitura 
     private HarvestArea harvestArea;
+    
+    // Massima distanza tra l'agente e un collider
+    private const float AgentRadius = 0.1f;
+
+    /// <summary>
+    /// La quantità di grano raccolta
+    /// </summary>
+    public int wheatCollected = 0;
 
     // Il grano più vicino all'agente
     private Wheat nearestWheat;
@@ -51,7 +59,6 @@ public class FarmerAgent : Agent
     {
         // Ottieni il riferimento al CharacterController
         characterController = GetComponent<CharacterController>();
-        // rigidbody = GetComponent<Rigidbody>();
         harvestArea = GetComponentInParent<HarvestArea>();
         wheatObtained = sickleCollision.GetHarvestedWheatCount();
 
@@ -59,7 +66,7 @@ public class FarmerAgent : Agent
         if (!trainingMode) MaxStep = 0;
 
         Debug.Log($"Training Mode: {trainingMode}");
-        Debug.Log($"Academy Instance: {Academy.Instance}");
+
     }
 
     /// <summary>
@@ -279,7 +286,7 @@ public class FarmerAgent : Agent
     /// <param name="actionsOut">The output action buffer</param>
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        Debug.Log("Heuristic method called");
+        //Debug.Log("Heuristic method called");
         var continuousActions = actionsOut.ContinuousActions;
         var discreteActions = actionsOut.DiscreteActions;
 
@@ -287,10 +294,123 @@ public class FarmerAgent : Agent
         continuousActions[0] = Input.GetAxis("Horizontal"); // Rotazione su Y
         continuousActions[1] = Input.GetAxis("Vertical");   // Movimento su Z
 
-        Debug.Log($"Heuristic Continuous Actions: {continuousActions[0]}, {continuousActions[1]}");
+        //Debug.Log($"Heuristic Continuous Actions: {continuousActions[0]}, {continuousActions[1]}");
        
         // Mietitura (premi Spazio)
-        discreteActions[0] = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
+        discreteActions[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
     }
+
+    /// <summary>
+    /// Evita che l'agente si muova o compia azioni
+    /// </summary>
+    public void FreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze non sono supportati nel training");
+        frozen = true;
+        
+        // Ferma il movimento dell'agente
+        velocity = Vector3.zero;
+        currentMovement = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Riprende il movimento dell'agente
+    /// </summary>
+    public void UnfreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze sono sono supportati nel training");
+        frozen = false;
+    }
+
+    /// <summary>
+    /// Chiamata quando il collider dell'agente collide con un altro collider
+    /// </summary>
+    private void OnTriggerEnter(Collider other)
+    {
+        TriggerEnterOrStay(other);
+    }
+
+    /// <summary>
+    /// Chiamata quando il collider dell'agente si trova in un trigger collider
+    /// </summary>
+    private void OnTriggerStay(Collider other)
+    {
+        TriggerEnterOrStay(other);
+    }
+
+    /// <summary>
+    /// Gestisce le due funzioni scritte appena sopra 
+    /// </summary>
+    private void TriggerEnterOrStay(Collider collider)
+    {
+        // Check if agent is colliding with nectar
+        if (collider.CompareTag("Grano"))
+        {
+            Vector3 closestPointToAgent = collider.ClosestPoint(transform.position);
+
+            // Check if the closest collision point is close to the beak tip
+            // Note: a collision with anything but the beak tip should not count
+            if (Vector3.Distance(transform.position, closestPointToAgent) < AgentRadius)
+            {
+                // Look up the flower for this nectar collider
+                Wheat wheat = harvestArea.GetWheatFromCollider(collider);
+
+                // Ottieni l'istanza di SickleCollision
+                SickleCollision sickle = GetComponentInChildren<SickleCollision>();
+
+                // Tieni traccia del grano raccolto    
+                Debug.Log("WheatCollected è:" + sickle.GetHarvestedWheatCount());
+
+                if (trainingMode)
+                {
+                    // Calculate reward for getting nectar
+                    //float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestWheat.WheatUpVector.normalized));
+                    AddReward(.01f);
+                }
+
+                // If flower is empty, update the nearest flower PER SICUREZZA TENERE D'OCCHIO DURANTE IL TRAINIG DIO CAAAAAAAAAAAAA
+                if (wheat == null)
+                {
+                    UpdateNearestWheat();
+                }
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Chiamata quando l'agente collide con un oggetto solido
+    /// </summary>
+    /// <param name="collision">Le informazioni sulla collisione</param>
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (trainingMode && collision.collider.CompareTag("Boundary"))
+        {
+            // Collisione con un oggetto Boundary, dai ricompensa negativa
+            AddReward(-.5f);
+        }
+    }
+
+    /// <summary>
+    /// Chiamata ad ogni frame
+    /// </summary>
+    private void Update()
+    {
+        // Mostra una linea dall'agente al grano più vicino
+        if (nearestWheat != null)
+            Debug.DrawLine(transform.position, nearestWheat.WheatCenterPosition, Color.green);
+    }
+
+
+/*  PER IL VIDEOGIOCO
+    private void FixedUpdate()
+    {
+        // Avoids scenario where nearest flower nectar is stolen by opponent and not updated
+        if (nearestFlower != null && !nearestFlower.HasNectar)
+            UpdateNearestFlower();
+    }
+*/
+
+
 
 }

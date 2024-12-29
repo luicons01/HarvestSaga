@@ -23,7 +23,7 @@ public class SickleCollision : MonoBehaviour
                 int harvestedAmount = wheat.Harvest();
                 totalHarvestedWheat += harvestedAmount; // Aggiorna il contatore
                 Debug.Log($"Il falcetto ha colpito il grano!");
-                Debug.Log($"Totale grano raccolto: {totalHarvestedWheat}");
+                Debug.Log($"Totale grano raccolto: {GetHarvestedWheatCount()}");
 
                 // Reset dopo 5 secondi (puoi cambiare il tempo o usare un altro trigger)
                 // StartCoroutine(ResetAfterTime(wheat, 5f));
@@ -35,6 +35,10 @@ public class SickleCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ritorna il numero totale di grano raccolto e resetta il contatore.
+    /// Questo metodo viene chiamato da FarmerAgent.
+    /// </summary>
     public int GetHarvestedWheatCount()
     {
         return totalHarvestedWheat;
