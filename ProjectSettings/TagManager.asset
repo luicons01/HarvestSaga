@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grano
   - Boundary
+  - Ostacolo
   layers:
   - Default
   - TransparentFX

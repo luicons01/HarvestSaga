@@ -41,7 +41,9 @@ public class SickleCollision : MonoBehaviour
     /// </summary>
     public int GetHarvestedWheatCount()
     {
-        return totalHarvestedWheat;
+        int harvested = totalHarvestedWheat;
+        totalHarvestedWheat = 0; // Reset per evitare conteggi duplicati
+        return harvested;
     }
 
     // Coroutines per il reset (la usiamo come debug)

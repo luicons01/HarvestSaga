@@ -6,7 +6,7 @@ public class HarvestArea : MonoBehaviour
 {
 
     // Il diametro dell'area dove l'agente e le piante di grano pososno essere usati per osesrvare la distanza relativa fra agente e grano 
-    public const float AreaDiameter = 20f;
+    public const float AreaDiameter = 30f;
 
     //Un dizionario di lookup per looking up un grano dal suo collider 
     private Dictionary<Collider, Wheat> wheatColliderDictionary;

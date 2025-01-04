@@ -104,6 +104,131 @@ public class FarmerAgent : Agent
 
 
     /// <summary>
+    /// Viene chiamata quando è assegnata un azione che sia dall'utente o dalla rete neurale
+    /// 
+    /// continuousActions[i] rappresentano:
+    /// Index 0: move vector x (+1 = right, -1 = left)
+    /// Index 1: move vector z (+1 = forward, -1 = backward)
+    /// 
+    /// discreteActions rappreseta l'azione di mietitura
+    /// </summary>
+    /// <param name="actions">L'azione da fare</param>
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        if (frozen) return;
+        // Ottieni le azioni continue
+        var continuousActions = actions.ContinuousActions;
+        var discreteActions = actions.DiscreteActions;
+        
+        // Calcola il vettore di movimento in avanti rispetto alla rotazione attuale
+        Vector3 move = transform.forward * continuousActions[1];
+        // Applica il movimento al CharacterController
+        characterController.Move(move * speed * Time.deltaTime);
+        
+        // Ottieni la rotazione attuale
+        Vector3 rotationVector = transform.rotation.eulerAngles;
+        float rotazione = continuousActions[0];
+
+        float yaw = rotationVector.y + rotazione * Time.fixedDeltaTime * yawSpeed;
+        // Applica la nuova rotazione
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        // Gestione della gravità
+        if (!characterController.isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y = 0; // Mantiene il personaggio ancorato al terreno
+        }
+
+        characterController.Move(velocity * Time.deltaTime);
+
+        if (actions.DiscreteActions[0] == 1)
+        {
+            TriggerHarvest();
+        }
+    }
+
+
+
+    /// <summary>
+    /// Raccogliere osservazioni vettoriali dall'ambiente
+    /// </summary>
+    /// <param name="sensor">The vector sensor</param>
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        // Se nearestWheat è nullo, osserva un array vuoto e ritorna in anticipo
+        if (nearestWheat == null)
+        {
+            sensor.AddObservation(new float[9]);
+            return;
+        }
+        
+        // Osserva la rotazione locale dell'agente (4 osservazioni)
+        sensor.AddObservation(transform.localRotation.normalized);
+
+        // Ottieni un vettore dall'agente al grano più vicino
+        Vector3 toWheat = nearestWheat.WheatCenterPosition - transform.position;
+ 
+        // Osserva un vettore normalizzato che punta al grano più vicino (3 osservazioni)
+        sensor.AddObservation(toWheat.normalized);
+
+        // Osserva un prodotto scalare che indica se l'agente è rivolto verso il grano (1 osservazione)
+        // (+1 significa che l'agente punta direttamente al grano, -1 significa direttamente lontano)
+        sensor.AddObservation(Vector3.Dot(transform.forward.normalized, -nearestWheat.WheatUpVector.normalized));
+
+        // Osservare la distanza relativa dall'agente al grano (1 osservazione)
+        sensor.AddObservation(toWheat.magnitude / HarvestArea.AreaDiameter);
+    }
+
+    /// <summary>
+    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters,
+    /// this function will be called. Its return values will be fed into
+    /// <see cref="OnActionReceived(ActionBuffers)"/> instead of using the neural network
+    /// </summary>
+    /// <param name="actionsOut">The output action buffer</param>
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        //Debug.Log("Heuristic method called");
+        var continuousActions = actionsOut.ContinuousActions;
+        var discreteActions = actionsOut.DiscreteActions;
+
+        // Movimento
+        continuousActions[0] = Input.GetAxis("Horizontal"); // Rotazione su Y
+        continuousActions[1] = Input.GetAxis("Vertical");   // Movimento su Z
+
+        //Debug.Log($"Heuristic Continuous Actions: {continuousActions[0]}, {continuousActions[1]}");
+       
+        // Mietitura (premi Spazio)
+        discreteActions[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Evita che l'agente si muova o compia azioni
+    /// </summary>
+    public void FreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze non sono supportati nel training");
+        frozen = true;
+        
+        // Ferma il movimento dell'agente
+        velocity = Vector3.zero;
+        currentMovement = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Riprende il movimento dell'agente
+    /// </summary>
+    public void UnfreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze sono sono supportati nel training");
+        frozen = false;
+    }
+
+
+    /// <summary>
     /// Muove l'agente in una posizione sicura
     /// se si trova vicino al grano, punterà verso il grano
     /// </summary>
@@ -190,52 +315,6 @@ public class FarmerAgent : Agent
         }
     }
 
-    /// <summary>
-    /// Viene chiamata quando è assegnata un azione che sia dall'utente o dalla rete neurale
-    /// 
-    /// continuousActions[i] rappresentano:
-    /// Index 0: move vector x (+1 = right, -1 = left)
-    /// Index 1: move vector z (+1 = forward, -1 = backward)
-    /// 
-    /// discreteActions rappreseta l'azione di mietitura
-    /// </summary>
-    /// <param name="actions">L'azione da fare</param>
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        // Ottieni le azioni continue
-        var continuousActions = actions.ContinuousActions;
-        var discreteActions = actions.DiscreteActions;
-        
-        // Calcola il vettore di movimento in avanti rispetto alla rotazione attuale
-        Vector3 move = transform.forward * continuousActions[1];
-        // Applica il movimento al CharacterController
-        characterController.Move(move * speed * Time.deltaTime);
-        
-        // Ottieni la rotazione attuale
-        Vector3 rotationVector = transform.rotation.eulerAngles;
-        float rotazione = continuousActions[0];
-
-        float yaw = rotationVector.y + rotazione * Time.fixedDeltaTime * yawSpeed;
-        // Applica la nuova rotazione
-        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
-
-        // Gestione della gravità
-        if (!characterController.isGrounded)
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-        else
-        {
-            velocity.y = 0; // Mantiene il personaggio ancorato al terreno
-        }
-
-        characterController.Move(velocity * Time.deltaTime);
-
-        if (actions.DiscreteActions[0] == 1)
-        {
-            TriggerHarvest();
-        }
-    }
 
     //metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
     private void TriggerHarvest()
@@ -248,79 +327,7 @@ public class FarmerAgent : Agent
     }
 
 
-    /// <summary>
-    /// Raccogliere osservazioni vettoriali dall'ambiente
-    /// </summary>
-    /// <param name="sensor">The vector sensor</param>
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        // Se nearestWheat è nullo, osserva un array vuoto e ritorna in anticipo
-        if (nearestWheat == null)
-        {
-            sensor.AddObservation(new float[9]);
-            return;
-        }
-        
-        // Osserva la rotazione locale dell'agente (4 osservazioni)
-        sensor.AddObservation(transform.localRotation.normalized);
 
-        // Ottieni un vettore dall'agente al grano più vicino
-        Vector3 toWheat = nearestWheat.WheatCenterPosition - transform.position;
- 
-        // Osserva un vettore normalizzato che punta al grano più vicino (3 osservazioni)
-        sensor.AddObservation(toWheat.normalized);
-
-        // Osserva un prodotto scalare che indica se l'agente è rivolto verso il grano (1 osservazione)
-        // (+1 significa che l'agente punta direttamente al grano, -1 significa direttamente lontano)
-        sensor.AddObservation(Vector3.Dot(transform.forward.normalized, -nearestWheat.WheatUpVector.normalized));
-
-        // Osservare la distanza relativa dall'agente al grano (1 osservazione)
-        sensor.AddObservation(toWheat.magnitude / HarvestArea.AreaDiameter);
-    }
-
-/// <summary>
-    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters,
-    /// this function will be called. Its return values will be fed into
-    /// <see cref="OnActionReceived(ActionBuffers)"/> instead of using the neural network
-    /// </summary>
-    /// <param name="actionsOut">The output action buffer</param>
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        //Debug.Log("Heuristic method called");
-        var continuousActions = actionsOut.ContinuousActions;
-        var discreteActions = actionsOut.DiscreteActions;
-
-        // Movimento
-        continuousActions[0] = Input.GetAxis("Horizontal"); // Rotazione su Y
-        continuousActions[1] = Input.GetAxis("Vertical");   // Movimento su Z
-
-        //Debug.Log($"Heuristic Continuous Actions: {continuousActions[0]}, {continuousActions[1]}");
-       
-        // Mietitura (premi Spazio)
-        discreteActions[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
-    }
-
-    /// <summary>
-    /// Evita che l'agente si muova o compia azioni
-    /// </summary>
-    public void FreezeAgent()
-    {
-        Debug.Assert(trainingMode == false, "Freeze/Unfreeze non sono supportati nel training");
-        frozen = true;
-        
-        // Ferma il movimento dell'agente
-        velocity = Vector3.zero;
-        currentMovement = Vector3.zero;
-    }
-
-    /// <summary>
-    /// Riprende il movimento dell'agente
-    /// </summary>
-    public void UnfreezeAgent()
-    {
-        Debug.Assert(trainingMode == false, "Freeze/Unfreeze sono sono supportati nel training");
-        frozen = false;
-    }
 
     /// <summary>
     /// Chiamata quando il collider dell'agente collide con un altro collider
@@ -357,7 +364,7 @@ public class FarmerAgent : Agent
 
                 // Ottieni l'istanza di SickleCollision
                 SickleCollision sickle = GetComponentInChildren<SickleCollision>();
-
+                
                 // Tieni traccia del grano raccolto    
                 Debug.Log("WheatCollected è:" + sickle.GetHarvestedWheatCount());
 
@@ -374,7 +381,12 @@ public class FarmerAgent : Agent
                     UpdateNearestWheat();
                 }
             }
-        }
+        }else {
+                if(trainingMode){
+                    AddReward(-.001f);
+                }
+            }
+  
     }
 
 
@@ -410,7 +422,6 @@ public class FarmerAgent : Agent
             UpdateNearestFlower();
     }
 */
-
 
 
 }
