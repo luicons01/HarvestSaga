@@ -16,15 +16,17 @@ public class SickleCollision : MonoBehaviour
 
             // Ottieni il riferimento allo script Wheat
             Wheat wheat = other.GetComponent<Wheat>();
-            
-            if (wheat != null)
+
+            if (wheat.IsWheatActive())
             {
                 // Chiama la funzione Harvest
                 int harvestedAmount = wheat.Harvest();
-                totalHarvestedWheat += harvestedAmount; // Aggiorna il contatore
-                Debug.Log($"Il falcetto ha colpito il grano!");
-                Debug.Log($"Totale grano raccolto: {GetHarvestedWheatCount()}");
-
+                if (harvestedAmount > 0)
+                {
+                    totalHarvestedWheat += harvestedAmount; // Aggiorna il contatore
+                    Debug.Log($"Il falcetto ha colpito il grano!");
+                    Debug.Log($"Totale grano raccolto: {GetHarvestedWheatCount()}");
+                }
                 // Reset dopo 5 secondi (puoi cambiare il tempo o usare un altro trigger)
                 // StartCoroutine(ResetAfterTime(wheat, 5f));
             }
@@ -36,14 +38,12 @@ public class SickleCollision : MonoBehaviour
     }
 
     /// <summary>
-    /// Ritorna il numero totale di grano raccolto e resetta il contatore.
+    /// Ritorna il numero totale di grano raccolto.
     /// Questo metodo viene chiamato da FarmerAgent.
     /// </summary>
     public int GetHarvestedWheatCount()
     {
-        int harvested = totalHarvestedWheat;
-        totalHarvestedWheat = 0; // Reset per evitare conteggi duplicati
-        return harvested;
+        return totalHarvestedWheat;
     }
 
     // Coroutines per il reset (la usiamo come debug)

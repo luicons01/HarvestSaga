@@ -44,7 +44,7 @@ public class HarvestArea : MonoBehaviour
         Wheats = new List<Wheat>();
 
         // Trova tutti gli oggetti di grano nella scena
-        foreach (Wheat wheat in FindObjectsOfType<Wheat>())
+        foreach (Wheat wheat in GetComponentsInChildren<Wheat>())
         {
             // Aggiungi il grano alla lista Wheats
             Wheats.Add(wheat);

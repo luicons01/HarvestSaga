@@ -109,7 +109,6 @@ public class FarmerAgent : Agent
     /// continuousActions[i] rappresentano:
     /// Index 0: move vector x (+1 = right, -1 = left)
     /// Index 1: move vector z (+1 = forward, -1 = backward)
-    /// 
     /// discreteActions rappreseta l'azione di mietitura
     /// </summary>
     /// <param name="actions">L'azione da fare</param>
@@ -147,11 +146,16 @@ public class FarmerAgent : Agent
 
         if (actions.DiscreteActions[0] == 1)
         {
+            int wheatBefore = sickleCollision.GetHarvestedWheatCount();
             TriggerHarvest();
+            int wheatAfter = sickleCollision.GetHarvestedWheatCount();
+
+            if (wheatAfter <= wheatBefore && trainingMode)
+            {
+                AddReward(-.001f); // Penalità per mietitura fallita
+            }
         }
     }
-
-
 
     /// <summary>
     /// Raccogliere osservazioni vettoriali dall'ambiente
@@ -273,14 +277,12 @@ public class FarmerAgent : Agent
                 // Combina i tre elementi precedenti per ottenere la posizione casuale
                 potentialPosition = harvestArea.transform.position + Vector3.up * height + direction * Vector3.forward * radius;
             }
-
             // Controllo per vedere se l'agent collide con qualcosa
             Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.10f);
 
             // Posizione sicura trovata se non c'è sovrapposizione
             safePositionFound = colliders.Length == 0;
         }
-
         Debug.Assert(safePositionFound, "Could not find a safe position to spawn");
 
         // Imposta posizione e rotazione
@@ -293,23 +295,18 @@ public class FarmerAgent : Agent
     /// </summary>
     private void UpdateNearestWheat()
     {
+        nearestWheat = null;
+        float minDistance = float.MaxValue;
+
         foreach (Wheat wheat in harvestArea.Wheats)
         {
-            if (nearestWheat == null)
+            if (wheat.IsWheatActive())
             {
-                // se non ci sono grani vicini viene settato questo come grano
-                nearestWheat = wheat;
-            }
-            else
-            {
-                // Calcola la distanza da questo fiore a quello più vicino
-                float distanceToWheat = Vector3.Distance(wheat.transform.position, transform.position);
-                float distanceToCurrentNearestWheat = Vector3.Distance(nearestWheat.transform.position, transform.position);
-
-                // se non c'è fiore più vicino o la distanza è minima assegna questo
-                if (!nearestWheat || distanceToWheat < distanceToCurrentNearestWheat)
+                float distance = Vector3.Distance(wheat.transform.position, transform.position);
+                if (distance < minDistance)
                 {
                     nearestWheat = wheat;
+                    minDistance = distance;
                 }
             }
         }
@@ -319,14 +316,23 @@ public class FarmerAgent : Agent
     //metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
     private void TriggerHarvest()
     {
-        // Attiva l'animazione tramite il riferimento
-        if (animator != null)
+        if (nearestWheat != null)
         {
-            animator.SetTrigger("attack");
+            float distanceToWheat = Vector3.Distance(transform.position, nearestWheat.WheatCenterPosition);
+
+            if (distanceToWheat < 0.5f)
+            {
+                if (animator != null)
+                {
+                    animator.SetTrigger("attack");
+                }
+
+                // Aggiorna il grano più vicino dopo aver mietuto
+                nearestWheat.Harvest();
+                UpdateNearestWheat();
+            }
         }
     }
-
-
 
 
     /// <summary>
@@ -350,46 +356,46 @@ public class FarmerAgent : Agent
     /// </summary>
     private void TriggerEnterOrStay(Collider collider)
     {
-        // Check if agent is colliding with nectar
+        // Controlla se l'agente collide con il grano
         if (collider.CompareTag("Grano"))
         {
             Vector3 closestPointToAgent = collider.ClosestPoint(transform.position);
 
-            // Check if the closest collision point is close to the beak tip
-            // Note: a collision with anything but the beak tip should not count
+            // Controlla se il punto di collisione più vicino è vicino all'agente
+            // Nota: una collisione con qualsiasi cosa tranne l'agente non dovrebbe essere conteggiata
             if (Vector3.Distance(transform.position, closestPointToAgent) < AgentRadius)
             {
-                // Look up the flower for this nectar collider
+                // Guarda al grano con questo WheatCollider
                 Wheat wheat = harvestArea.GetWheatFromCollider(collider);
 
                 // Ottieni l'istanza di SickleCollision
                 SickleCollision sickle = GetComponentInChildren<SickleCollision>();
                 
+                //VEDERE SE BISOGNA USARE wheatObtained CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 // Tieni traccia del grano raccolto    
-                Debug.Log("WheatCollected è:" + sickle.GetHarvestedWheatCount());
+                //Debug.Log("WheatCollected è:" + sickle.GetHarvestedWheatCount());
 
                 if (trainingMode)
                 {
-                    // Calculate reward for getting nectar
-                    //float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -nearestWheat.WheatUpVector.normalized));
-                    AddReward(.01f);
+                    // Calcola il reward per mietere il grano
+                    float alignmentBonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -wheat.WheatUpVector.normalized));
+                    AddReward(0.01f + alignmentBonus);
                 }
 
-                // If flower is empty, update the nearest flower PER SICUREZZA TENERE D'OCCHIO DURANTE IL TRAINIG DIO CAAAAAAAAAAAAA
-                if (wheat == null)
+                // Se il grano è nullo passa al prossimo PER SICUREZZA TENERE D'OCCHIO DURANTE IL TRAINING
+                if (!wheat.IsWheatActive())
                 {
                     UpdateNearestWheat();
                 }
             }
-        }else {
+        }
+        else {
                 if(trainingMode){
-                    AddReward(-.001f);
+                    AddReward(-.01f);
                 }
             }
-  
     }
-
-
+    
     /// <summary>
     /// Chiamata quando l'agente collide con un oggetto solido
     /// </summary>
@@ -418,8 +424,8 @@ public class FarmerAgent : Agent
     private void FixedUpdate()
     {
         // Avoids scenario where nearest flower nectar is stolen by opponent and not updated
-        if (nearestFlower != null && !nearestFlower.HasNectar)
-            UpdateNearestFlower();
+        if (nearestWheat != null && !nearestWheat.IsWheatActive())
+            UpdateNearestWheat();
     }
 */
 

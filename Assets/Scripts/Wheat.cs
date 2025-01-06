@@ -74,4 +74,11 @@ public class Wheat : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    //controlla se il wheat è attivo
+    public bool IsWheatActive()
+    {
+        return gameObject.activeSelf;
+    }
+
+
 }
