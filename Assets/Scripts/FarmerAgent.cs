@@ -57,6 +57,7 @@ public class FarmerAgent : Agent
     /// </summary>
     public override void Initialize()
     {
+        Debug.Log($"Training Mode: {trainingMode}");
         // Ottieni il riferimento al CharacterController
         characterController = GetComponent<CharacterController>();
         harvestArea = GetComponentInParent<HarvestArea>();
@@ -66,7 +67,6 @@ public class FarmerAgent : Agent
         if (!trainingMode) MaxStep = 0;
 
         Debug.Log($"Training Mode: {trainingMode}");
-
     }
 
     /// <summary>
@@ -293,47 +293,49 @@ public class FarmerAgent : Agent
     /// <summary>
     /// Aggiorna il grano più vicino all'agente
     /// </summary>
-    private void UpdateNearestWheat()
+private void UpdateNearestWheat()
+{
+    foreach (Wheat wheat in harvestArea.Wheats)
     {
-        nearestWheat = null;
-        float minDistance = float.MaxValue;
-
-        foreach (Wheat wheat in harvestArea.Wheats)
+        if (nearestWheat == null && wheat.IsWheatActive())
         {
-            if (wheat.IsWheatActive())
+            // Se non ci sono grani vicini, viene impostato questo come grano
+            nearestWheat = wheat;
+        }
+        else if (wheat.IsWheatActive())
+        {
+            // Calcola la distanza da questo grano a quello più vicino
+            float distanceToWheat = Vector3.Distance(wheat.transform.position, transform.position);
+            float distanceToCurrentNearestWheat = Vector3.Distance(nearestWheat.transform.position, transform.position);
+
+            // Se non c'è un grano più vicino o la distanza è minore, assegna questo grano
+            if (!nearestWheat.IsWheatActive() || distanceToWheat < distanceToCurrentNearestWheat)
             {
-                float distance = Vector3.Distance(wheat.transform.position, transform.position);
-                if (distance < minDistance)
-                {
-                    nearestWheat = wheat;
-                    minDistance = distance;
-                }
+                nearestWheat = wheat;
             }
         }
     }
-
+}
 
     //metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
     private void TriggerHarvest()
     {
+        // Controlla se l'agente è vicino a una spiga di grano
         if (nearestWheat != null)
         {
             float distanceToWheat = Vector3.Distance(transform.position, nearestWheat.WheatCenterPosition);
 
+            // Permetti la mietitura solo se l'agente è vicino al grano
             if (distanceToWheat < 0.5f)
             {
+                // Attiva l'animazione di mietitura
                 if (animator != null)
                 {
                     animator.SetTrigger("attack");
                 }
-
-                // Aggiorna il grano più vicino dopo aver mietuto
-                nearestWheat.Harvest();
-                UpdateNearestWheat();
             }
         }
     }
-
 
     /// <summary>
     /// Chiamata quando il collider dell'agente collide con un altro collider
@@ -420,14 +422,13 @@ public class FarmerAgent : Agent
     }
 
 
-/*  PER IL VIDEOGIOCO
+    // PER IL VIDEOGIOCO
     private void FixedUpdate()
     {
         // Avoids scenario where nearest flower nectar is stolen by opponent and not updated
         if (nearestWheat != null && !nearestWheat.IsWheatActive())
             UpdateNearestWheat();
     }
-*/
 
 
 }
