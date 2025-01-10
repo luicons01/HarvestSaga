@@ -25,11 +25,6 @@ public class FarmerAgent : Agent
     // Massima distanza tra l'agente e un collider
     private const float AgentRadius = 0.1f;
 
-    /// <summary>
-    /// La quantità di grano raccolta
-    /// </summary>
-    public int wheatCollected = 0;
-
     // Il grano più vicino all'agente
     private Wheat nearestWheat;
     
@@ -38,7 +33,10 @@ public class FarmerAgent : Agent
 
     public SickleCollision sickleCollision;
 
-    public int wheatObtained;
+    /// <summary>
+    /// La quantità di grano raccolta
+    /// </summary>
+    public int WheatObtained { get; private set; }
 
      public Animator animator; // Riferimento all'Animator
 
@@ -46,11 +44,14 @@ public class FarmerAgent : Agent
 
     private Vector3 currentMovement; 
 
-    public float speed = 5f;  // Velocità di movimento
+    public float speed = 3f;  // Velocità di movimento
 
     public float gravity = -9.8f; // Gravità
  
-    public float yawSpeed = 100f; // Velocità di rotazione
+    public float yawSpeed = 300f; // Velocità di rotazione
+
+    // Allows for smoother yaw changes
+    private float smoothYawChange = 0f;
 
     /// <summary>
     /// Inizializza l'agente
@@ -61,7 +62,7 @@ public class FarmerAgent : Agent
         // Ottieni il riferimento al CharacterController
         characterController = GetComponent<CharacterController>();
         harvestArea = GetComponentInParent<HarvestArea>();
-        wheatObtained = sickleCollision.GetHarvestedWheatCount();
+        WheatObtained = sickleCollision.GetHarvestedWheatCount();
 
         // Se non si è in training mode si può giocare per sempre
         if (!trainingMode) MaxStep = 0;
@@ -81,7 +82,7 @@ public class FarmerAgent : Agent
         }
 
         // Reset del numero di grano ottenuto
-        wheatObtained = 0;
+        WheatObtained = 0;
 
         // Si impostano le velocità a 0 prima che un Episode inizi
         velocity = Vector3.zero; // Resetta la velocità verticale
@@ -126,9 +127,11 @@ public class FarmerAgent : Agent
         
         // Ottieni la rotazione attuale
         Vector3 rotationVector = transform.rotation.eulerAngles;
-        float rotazione = continuousActions[0];
 
-        float yaw = rotationVector.y + rotazione * Time.fixedDeltaTime * yawSpeed;
+        float rotazione = continuousActions[0];
+        // Calcola i cambiamenti di rotazione in modo smooth
+        smoothYawChange = Mathf.MoveTowards(smoothYawChange, rotazione, 2f * Time.fixedDeltaTime);
+        float yaw = rotationVector.y + smoothYawChange * Time.fixedDeltaTime * yawSpeed;
         // Applica la nuova rotazione
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
@@ -391,7 +394,7 @@ private void UpdateNearestWheat()
                 }
             }
         }
-        else {
+        else  if(!collider.CompareTag("Grano")){
                 if(trainingMode){
                     AddReward(-.01f);
                 }
