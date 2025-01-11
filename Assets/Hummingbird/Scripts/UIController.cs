@@ -3,15 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Controls a very simple UI. Doesn't do anything on its own.
+/// Controlla una semplice UI
 /// </summary>
 public class UIController : MonoBehaviour
 {
-    [Tooltip("The nectar progress bar for the player")]
-    public Slider playerWheatBar;
-
-    [Tooltip("The nectar progress bar for the opponent")]
-    public Slider opponentWheatBar;
+    [Tooltip("The wheat count text")]
+    public TextMeshProUGUI wheatCountText;
 
     [Tooltip("The timer text")]
     public TextMeshProUGUI timerText;
@@ -26,17 +23,17 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI buttonText;
 
     /// <summary>
-    /// Delegate for a button click
+    /// Delegate per il click di un pulsante
     /// </summary>
     public delegate void ButtonClick();
 
     /// <summary>
-    /// Called when the button is clicked
+    /// Chiamato quando un pulsante è stato cliccato
     /// </summary>
     public ButtonClick OnButtonClicked;
 
     /// <summary>
-    /// Responds to button clicks
+    /// Risponde ai click di un pulsante
     /// </summary>
     public void ButtonClicked()
     {
@@ -44,9 +41,9 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows the button
+    /// Mostra il pulsante
     /// </summary>
-    /// <param name="text">The text string on the button</param>
+    /// <param name="text">la stringa sul pulsante</param>
     public void ShowButton(string text)
     {
         buttonText.text = text;
@@ -54,7 +51,7 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Hides the button
+    /// Nasconde il pulsante
     /// </summary>
     public void HideButton()
     {
@@ -62,9 +59,9 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows banner text
+    /// Mostra il banner text
     /// </summary>
-    /// <param name="text">The text string to show</param>
+    /// <param name="text">la stringa da mostrare</param>
     public void ShowBanner(string text)
     {
         bannerText.text = text;
@@ -72,7 +69,7 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Hides the banner text
+    /// Nasconde il banner text
     /// </summary>
     public void HideBanner()
     {
@@ -80,9 +77,9 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the timer, if timeRemaining is negative, hides the text
+    /// Imposta il timer , se timeRemaining è negativo, nasconde il testo
     /// </summary>
-    /// <param name="timeRemaining">The time remaining in seconds</param>
+    /// <param name="timeRemaining">il tempo rimanente in secondi</param>
     public void SetTimer(float timeRemaining)
     {
         if (timeRemaining > 0f)
@@ -92,20 +89,11 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the player's nectar amount
+    /// Imposta la quantità di grano raccolto
     /// </summary>
-    /// <param name="nectarAmount">An amount between 0 and 1</param>
-    public void SetPlayerWheat(int wheatAmount)
+    /// <param name="nectarAmount">Una quantità da 0 a 12</param>
+    public void SetWheatCount(int wheatAmount)
     {
-        playerWheatBar.value = wheatAmount;
-    }
-
-    /// <summary>
-    /// Sets the opponent's nectar amount
-    /// </summary>
-    /// <param name="nectarAmount">An amount between 0 and 1</param>
-    public void SetOpponentWheat(int wheatAmount)
-    {
-        opponentWheatBar.value = wheatAmount;
+        wheatCountText.text = "Wheat: " + wheatAmount;
     }
 }

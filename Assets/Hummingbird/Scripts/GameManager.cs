@@ -2,12 +2,12 @@
 using UnityEngine;
 
 /// <summary>
-/// Manages game logic and controls the UI
+/// Gestisce la logica ed il controllo della UI
 /// </summary>
 public class GameManager : MonoBehaviour
 {
     [Tooltip("Game ends when an agent collects this much nectar")]
-    public int maxWheat = 8;
+    public int maxWheat = 12;
 
     [Tooltip("Game ends after this many seconds have elapsed")]
     public float timerAmount = 60f;
@@ -16,10 +16,7 @@ public class GameManager : MonoBehaviour
     public UIController uiController;
 
     [Tooltip("The player hummingbird")]
-    public FarmerAgent player;
-
-    [Tooltip("The ML-Agent opponent hummingbird")]
-    public FarmerAgent opponent;
+    public FarmerAgent agent;
 
     [Tooltip("The flower area")]
     public HarvestArea harvestArea;
@@ -27,11 +24,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("The main camera for the scene")]
     public Camera mainCamera;
 
-    // When the game timer started
+    public SickleCollision sickleCollision;
+
+    // Quando il timer è partito
     private float gameTimerStartTime;
 
     /// <summary>
-    /// All possible game states
+    /// Tutti i possibili stati del Game
     /// </summary>
     public enum GameState
     {
@@ -43,12 +42,12 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// The current game state
+    /// Lo stato del Game attuale
     /// </summary>
     public GameState State { get; private set; } = GameState.Default;
 
     /// <summary>
-    /// Gets the time remaining in the game
+    /// Ottiene il tempo rimanente nel Game
     /// </summary>
     public float TimeRemaining
     {
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles a button click in different states
+    /// Gestisce il premere un pulsante nei vari stati
     /// </summary>
     public void ButtonClicked()
     {
@@ -88,73 +87,68 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when the game starts
+    /// Chiamata quando inizia il Game
     /// </summary>
     private void Start()
     {
-        // Subscribe to button click events from the UI
         uiController.OnButtonClicked += ButtonClicked;
 
-        // Start the main menu
+        // Avvio del Main Menu
         MainMenu();
     }
 
     /// <summary>
-    /// Called on destroy
+    /// Chiamata alla distruzione
     /// </summary>
     private void OnDestroy()
     {
-        // Unsubscribe from button click events from the UI
         uiController.OnButtonClicked -= ButtonClicked;
     }
 
     /// <summary>
-    /// Shows the main menu
+    /// Mostra il main menu
     /// </summary>
     private void MainMenu()
     {
-        // Set the state to "main menu"
+        // Imposta lo stato a "Main Menu"
         State = GameState.MainMenu;
 
-        // Update the UI
+        // Aggiorna la UI
         uiController.ShowBanner("");
         uiController.ShowButton("Start");
 
-        // Use the main camera, disable agent cameras
+        // Usa la camera principale e dissattiva quella dell'agente
         mainCamera.gameObject.SetActive(true);
-        player.agentCamera.gameObject.SetActive(false);
-        opponent.agentCamera.gameObject.SetActive(false); // Never turn this back on
+        agent.agentCamera.gameObject.SetActive(false);
 
-        // Reset the flowers
+        // Reset dei wheats
         harvestArea.ResetWheats();
 
-        // Reset the agents
-        player.OnEpisodeBegin();
-        opponent.OnEpisodeBegin();
+        // Reset dell'Agente
+        agent.OnEpisodeBegin();
 
-        // Freeze the agents
-        player.FreezeAgent();
-        opponent.FreezeAgent();
+        // Freeze dell'Agente
+        agent.FreezeAgent();
     }
 
     /// <summary>
-    /// Starts the game with a countdown
+    /// Inizia il Game con un countdown
     /// </summary>
     /// <returns>IEnumerator</returns>
     private IEnumerator StartGame()
     {
-        // Set the state to "preparing"
+        // Imposta lo stato a "preparing"
         State = GameState.Preparing;
 
-        // Update the UI (hide it)
+        // Aggiorna la UI (la nasconde)
         uiController.ShowBanner("");
         uiController.HideButton();
 
-        // Use the player camera, disable the main camera
+        // Usa la camera dell'Agente e disattiva la Main Camera
         mainCamera.gameObject.SetActive(false);
-        player.agentCamera.gameObject.SetActive(true);
+        agent.agentCamera.gameObject.SetActive(true);
 
-        // Show countdown
+        // Mostra il countdown
         uiController.ShowBanner("3");
         yield return new WaitForSeconds(1f);
         uiController.ShowBanner("2");
@@ -165,77 +159,67 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         uiController.ShowBanner("");
 
-        // Set the state to "playing"
+        // Imposta lo stato a "playing"
         State = GameState.Playing;
 
-        // Start the game timer
+        // Avvia il timer
         gameTimerStartTime = Time.time;
 
-        // Unfreeze the agents
-        player.UnfreezeAgent();
-        opponent.UnfreezeAgent();
+        // Unfreeze dell'Agente
+        agent.UnfreezeAgent();
     }
 
     /// <summary>
-    /// Ends the game
+    /// Termina il Game
     /// </summary>
     private void EndGame()
     {
-        // Set the game state to "game over"
         State = GameState.Gameover;
+        agent.FreezeAgent();
 
-        // Freeze the agents
-        player.FreezeAgent();
-        opponent.FreezeAgent();
+        int harvestedWheat = sickleCollision.GetHarvestedWheatCount();
 
-        // Update banner text depending on win/lose
-        if (player.WheatObtained >= opponent.WheatObtained )
+        if (harvestedWheat >= maxWheat)
         {
-            uiController.ShowBanner("You win!");
+            uiController.ShowBanner("Agent wins!");
         }
         else
         {
-            uiController.ShowBanner("ML-Agent wins!");
+            uiController.ShowBanner("Time's up!");
         }
 
-        // Update button text
         uiController.ShowButton("Main Menu");
     }
 
+
     /// <summary>
-    /// Called every frame
+    /// Chiamata ogni frame
     /// </summary>
     private void Update()
-    {
-        if (State == GameState.Playing)
         {
-            // Check to see if time has run out or either agent got the max nectar amount
-            if (TimeRemaining <= 0f ||
-                player.WheatObtained >= maxWheat ||
-                opponent.WheatObtained >= maxWheat)
+            if (State == GameState.Playing)
             {
-                EndGame();
+                int harvestedWheat = sickleCollision.GetHarvestedWheatCount();
+
+                if (TimeRemaining <= 0f || harvestedWheat >= maxWheat)
+                {
+                    EndGame();
+                }
+
+                uiController.SetTimer(TimeRemaining);
+                uiController.SetWheatCount(harvestedWheat);
+                uiController.SetWheatCount(harvestedWheat);
+
             }
-
-            // Update the timer and nectar progress bars
-            uiController.SetTimer(TimeRemaining);
-            uiController.SetPlayerWheat(player.WheatObtained / maxWheat);
-            uiController.SetOpponentWheat(opponent.WheatObtained / maxWheat);
+            else if (State == GameState.Preparing || State == GameState.Gameover)
+            {
+                uiController.SetTimer(TimeRemaining);
+            }
+            else
+            {
+                uiController.SetTimer(-1f);
+                uiController.SetWheatCount(0);
+            }
         }
-        else if (State == GameState.Preparing || State == GameState.Gameover)
-        {
-            // Update the timer
-            uiController.SetTimer(TimeRemaining);
-        }
-        else
-        {
-            // Hide the timer
-            uiController.SetTimer(-1f);
-
-            // Update the progress bars
-            uiController.SetPlayerWheat(0);
-            uiController.SetOpponentWheat(0);
-        }
-
     }
-}
+

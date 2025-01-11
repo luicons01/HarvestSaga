@@ -28,7 +28,7 @@ public class FarmerAgent : Agent
     // Il grano più vicino all'agente
     private Wheat nearestWheat;
     
-    // Whether the agent is frozen (intentionally not flying)
+    // Quando l'agente è fermo
     private bool frozen = false;
 
     public SickleCollision sickleCollision;
@@ -50,7 +50,7 @@ public class FarmerAgent : Agent
  
     public float yawSpeed = 300f; // Velocità di rotazione
 
-    // Allows for smoother yaw changes
+    // Permette una rotazione più fluida
     private float smoothYawChange = 0f;
 
     /// <summary>
@@ -191,11 +191,11 @@ public class FarmerAgent : Agent
     }
 
     /// <summary>
-    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters,
-    /// this function will be called. Its return values will be fed into
-    /// <see cref="OnActionReceived(ActionBuffers)"/> instead of using the neural network
+    /// Quando il Behavior Type di Behavior Parameters è settato su "Heuristic Only"
+    /// questa funzione verrà chiamata. Il valore di ritorno di questa funzione andrà a 
+    /// <see cref="OnActionReceived(ActionBuffers)"/> invece di usare la rete neurale
     /// </summary>
-    /// <param name="actionsOut">The output action buffer</param>
+    /// <param name="actionsOut">L'output di action buffer</param>
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         //Debug.Log("Heuristic method called");
@@ -320,7 +320,7 @@ private void UpdateNearestWheat()
     }
 }
 
-    //metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
+    // Metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
     private void TriggerHarvest()
     {
         // Controlla se l'agente è vicino a una spiga di grano
@@ -375,10 +375,6 @@ private void UpdateNearestWheat()
 
                 // Ottieni l'istanza di SickleCollision
                 SickleCollision sickle = GetComponentInChildren<SickleCollision>();
-                
-                //VEDERE SE BISOGNA USARE wheatObtained CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                // Tieni traccia del grano raccolto    
-                //Debug.Log("WheatCollected è:" + sickle.GetHarvestedWheatCount());
 
                 if (trainingMode)
                 {
@@ -424,8 +420,6 @@ private void UpdateNearestWheat()
             Debug.DrawLine(transform.position, nearestWheat.WheatCenterPosition, Color.green);
     }
 
-
-    // PER IL VIDEOGIOCO
     private void FixedUpdate()
     {
         // Avoids scenario where nearest flower nectar is stolen by opponent and not updated

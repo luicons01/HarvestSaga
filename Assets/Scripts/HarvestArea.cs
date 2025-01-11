@@ -17,11 +17,11 @@ public class HarvestArea : MonoBehaviour
     public List<Wheat> Wheats { get; private set; }
 
     /// <summary>
-    /// Reset i wheats
+    /// Reset dei wheats
     /// </summary>
     public void ResetWheats()
     {
-        // Reset ogni wheat
+        // Reset di ogni wheat
         foreach (Wheat wheat in Wheats)
         {
             wheat.ResetWheat();
@@ -56,7 +56,6 @@ public class HarvestArea : MonoBehaviour
                 wheatColliderDictionary[wheatCollider] = wheat;
             }
         }
-        //DebugHarvestArea();
     }
 
 
