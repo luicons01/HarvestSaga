@@ -263,8 +263,14 @@ public class FarmerAgent : Agent
                 Vector3 toWheat = randomWheat.WheatCenterPosition - potentialPosition;
                 toWheat.y = 0; // Ignora la componente verticale
 
-                // Crea una rotazione che guarda il grano sul piano orizzontale
-                potentialRotation = Quaternion.LookRotation(toWheat.normalized, Vector3.up);
+                if (toWheat.sqrMagnitude > 0.001f)  // Controlla se il vettore non è uno zero vector
+                {
+                    potentialRotation = Quaternion.LookRotation(toWheat.normalized, Vector3.up);
+                }
+                else
+                {
+                    potentialRotation = Quaternion.identity;  // Usa la rotazione predefinita
+                }
             }
             else
             {
@@ -405,6 +411,7 @@ private void UpdateNearestWheat()
     {
         if (trainingMode && collision.collider.CompareTag("Boundary"))
         {
+            Debug.Assert(trainingMode == true, "OnCollisionEnter CHIAMATAAAAAAAAAAAAAA");
             // Collisione con un oggetto Boundary, dai ricompensa negativa
             AddReward(-.5f);
         }

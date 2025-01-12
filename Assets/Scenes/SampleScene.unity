@@ -33704,7 +33704,7 @@ MonoBehaviour:
   MaxStep: 5000
   moveForce: 2
   agentCamera: {fileID: 0}
-  trainingMode: 0
+  trainingMode: 1
   sickleCollision: {fileID: 683716317}
   animator: {fileID: 1960988451}
   speed: 5
@@ -33732,7 +33732,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 2922f13d33da345e996a8604b6a70783, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 3
   m_BehaviorType: 0
   m_BehaviorName: Farmer
