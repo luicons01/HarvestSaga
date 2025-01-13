@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int maxWheat = 12;
 
     [Tooltip("Game ends after this many seconds have elapsed")]
-    public float timerAmount = 60f;
+    public float timerAmount = 150f;
 
     [Tooltip("The UI Controller")]
     public UIController uiController;
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
         State = GameState.MainMenu;
 
         // Aggiorna la UI
-        uiController.ShowBanner("");
+        uiController.ShowBanner("Harvest Saga!");
         uiController.ShowButton("Start");
 
         // Usa la camera principale e dissattiva quella dell'agente

@@ -12,7 +12,7 @@ public class SickleCollision : MonoBehaviour
         // Controlla se l'oggetto colpito ha il tag "Grano"
         if (other.CompareTag("Grano"))
         {
-            Debug.Log("Il falcetto ha colpito il grano!");
+            //Debug.Log("Il falcetto ha colpito il grano!");
 
             // Ottieni il riferimento allo script Wheat
             Wheat wheat = other.GetComponent<Wheat>();
@@ -24,7 +24,7 @@ public class SickleCollision : MonoBehaviour
                 if (harvestedAmount > 0)
                 {
                     totalHarvestedWheat += harvestedAmount; // Aggiorna il contatore
-                    Debug.Log($"Il falcetto ha colpito il grano!");
+                    //Debug.Log($"Il falcetto ha colpito il grano!");
                     Debug.Log($"Totale grano raccolto: {GetHarvestedWheatCount()}");
                 }
                 // Reset dopo 5 secondi (puoi cambiare il tempo o usare un altro trigger)

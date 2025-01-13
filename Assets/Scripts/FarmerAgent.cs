@@ -121,6 +121,21 @@ public class FarmerAgent : Agent
         // Applica il movimento al CharacterController
         characterController.Move(move * speed * Time.deltaTime);
         
+        // Attiva animazione di camminata
+        float distanceToWheat = nearestWheat != null
+        ? Vector3.Distance(transform.position, nearestWheat.WheatCenterPosition)
+        : float.MaxValue;
+
+        // Gestione della camminata
+        bool isMoving = continuousActions[1] != 0 && distanceToWheat > 0.5f;
+        SetWalkingAnimation(isMoving);
+
+        // Movimento fisico
+        if (isMoving)
+        {
+            characterController.Move(move * speed * Time.deltaTime);
+        }
+
         // Ottieni la rotazione attuale
         Vector3 rotationVector = transform.rotation.eulerAngles;
 
@@ -152,6 +167,15 @@ public class FarmerAgent : Agent
             {
                 AddReward(-.001f); // Penalità per mietitura fallita
             }
+        }
+    }
+
+    // Funzione per attivare l'animazione di camminata
+    private void SetWalkingAnimation(bool isWalking)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", isWalking);
         }
     }
 
@@ -218,6 +242,7 @@ public class FarmerAgent : Agent
         // Ferma il movimento dell'agente
         velocity = Vector3.zero;
         currentMovement = Vector3.zero;
+        SetWalkingAnimation(false);
     }
 
     /// <summary>
