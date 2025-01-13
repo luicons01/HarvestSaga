@@ -8,8 +8,6 @@ using Unity.MLAgents.Actuators;
 
 public class FarmerAgent : Agent
 {
-    [Tooltip("Force to apply when moving")]
-    public float moveForce = 1f;
 
     [Tooltip("The agent's camera")] 
     public Camera agentCamera;
@@ -44,11 +42,11 @@ public class FarmerAgent : Agent
 
     private Vector3 currentMovement; 
 
-    public float speed = 3f;  // Velocità di movimento
+    public float speed = 5f;  // Velocità di movimento
 
-    public float gravity = -9.8f; // Gravità
+    private float gravity = -9.8f; // Gravità
  
-    public float yawSpeed = 300f; // Velocità di rotazione
+    public float yawSpeed = 200f; // Velocità di rotazione
 
     // Permette una rotazione più fluida
     private float smoothYawChange = 0f;
@@ -80,7 +78,6 @@ public class FarmerAgent : Agent
             // Resetta il grano solo nel training
             harvestArea.ResetWheats();
         }
-
         // Reset del numero di grano ottenuto
         WheatObtained = 0;
 
@@ -95,7 +92,6 @@ public class FarmerAgent : Agent
             // Spawna difronte ad un fascio di grano con una probabilità del 50% durante il training
             inFrontOfWheat = UnityEngine.Random.value > .5f;
         }
-
         // Muovi l'agente a una posizione random
         MoveToSafeRandomPosition(inFrontOfWheat);
 
@@ -144,7 +140,6 @@ public class FarmerAgent : Agent
         {
             velocity.y = 0; // Mantiene il personaggio ancorato al terreno
         }
-
         characterController.Move(velocity * Time.deltaTime);
 
         if (actions.DiscreteActions[0] == 1)
@@ -234,7 +229,6 @@ public class FarmerAgent : Agent
         frozen = false;
     }
 
-
     /// <summary>
     /// Muove l'agente in una posizione sicura
     /// se si trova vicino al grano, punterà verso il grano
@@ -263,14 +257,8 @@ public class FarmerAgent : Agent
                 Vector3 toWheat = randomWheat.WheatCenterPosition - potentialPosition;
                 toWheat.y = 0; // Ignora la componente verticale
 
-                if (toWheat.sqrMagnitude > 0.001f)  // Controlla se il vettore non è uno zero vector
-                {
-                    potentialRotation = Quaternion.LookRotation(toWheat.normalized, Vector3.up);
-                }
-                else
-                {
-                    potentialRotation = Quaternion.identity;  // Usa la rotazione predefinita
-                }
+                // Crea una rotazione che guarda il grano sul piano orizzontale
+                potentialRotation = Quaternion.LookRotation(toWheat.normalized, Vector3.up);
             }
             else
             {
@@ -302,29 +290,29 @@ public class FarmerAgent : Agent
     /// <summary>
     /// Aggiorna il grano più vicino all'agente
     /// </summary>
-private void UpdateNearestWheat()
-{
-    foreach (Wheat wheat in harvestArea.Wheats)
+    private void UpdateNearestWheat()
     {
-        if (nearestWheat == null && wheat.IsWheatActive())
+        foreach (Wheat wheat in harvestArea.Wheats)
         {
-            // Se non ci sono grani vicini, viene impostato questo come grano
-            nearestWheat = wheat;
-        }
-        else if (wheat.IsWheatActive())
-        {
-            // Calcola la distanza da questo grano a quello più vicino
-            float distanceToWheat = Vector3.Distance(wheat.transform.position, transform.position);
-            float distanceToCurrentNearestWheat = Vector3.Distance(nearestWheat.transform.position, transform.position);
-
-            // Se non c'è un grano più vicino o la distanza è minore, assegna questo grano
-            if (!nearestWheat.IsWheatActive() || distanceToWheat < distanceToCurrentNearestWheat)
+            if (nearestWheat == null && wheat.IsWheatActive())
             {
+                // Se non ci sono grani vicini, viene impostato questo come grano
                 nearestWheat = wheat;
+            }
+            else if (wheat.IsWheatActive())
+            {
+                // Calcola la distanza da questo grano a quello più vicino
+                float distanceToWheat = Vector3.Distance(wheat.transform.position, transform.position);
+                float distanceToCurrentNearestWheat = Vector3.Distance(nearestWheat.transform.position, transform.position);
+
+                // Se non c'è un grano più vicino o la distanza è minore, assegna questo grano
+                if (!nearestWheat.IsWheatActive() || distanceToWheat < distanceToCurrentNearestWheat)
+                {
+                    nearestWheat = wheat;
+                }
             }
         }
     }
-}
 
     // Metodo che attiva l'animazione e notifica il falcetto per gestire la mietitura
     private void TriggerHarvest()
@@ -386,7 +374,7 @@ private void UpdateNearestWheat()
                 {
                     // Calcola il reward per mietere il grano
                     float alignmentBonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized, -wheat.WheatUpVector.normalized));
-                    AddReward(0.01f + alignmentBonus);
+                    AddReward(0.02f + alignmentBonus);
                 }
 
                 // Se il grano è nullo passa al prossimo PER SICUREZZA TENERE D'OCCHIO DURANTE IL TRAINING
@@ -396,24 +384,23 @@ private void UpdateNearestWheat()
                 }
             }
         }
-        else  if(!collider.CompareTag("Grano")){
-                if(trainingMode){
-                    AddReward(-.01f);
-                }
-            }
     }
     
     /// <summary>
     /// Chiamata quando l'agente collide con un oggetto solido
     /// </summary>
     /// <param name="collision">Le informazioni sulla collisione</param>
-    private void OnCollisionEnter(Collision collision)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (trainingMode && collision.collider.CompareTag("Boundary"))
+        if (trainingMode && hit.collider.CompareTag("Boundary"))
         {
-            Debug.Assert(trainingMode == true, "OnCollisionEnter CHIAMATAAAAAAAAAAAAAA");
-            // Collisione con un oggetto Boundary, dai ricompensa negativa
-            AddReward(-.5f);
+            Debug.Log("Collisione con Boundary!");
+            AddReward(-0.5f);
+        }
+        else if (trainingMode && hit.collider.CompareTag("Ostacolo"))
+        {
+            Debug.Log("Collisione con Ostacolo!");
+            AddReward(-0.3f);
         }
     }
 
@@ -433,6 +420,5 @@ private void UpdateNearestWheat()
         if (nearestWheat != null && !nearestWheat.IsWheatActive())
             UpdateNearestWheat();
     }
-
 
 }
