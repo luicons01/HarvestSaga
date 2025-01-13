@@ -2,7 +2,7 @@
 
  ##### IL PROGETTO È AMATORIALE, I LOGHI E IL NOME DELL'PROGETTO SONO INVENTATI E UTILIZZATI SOLO IN AMBITO UNIVERSITARIO.
  
-Progetto realizzato per l'esame "Information Visualization" di UNISA.
+Progetto realizzato per l'esame "Information Visualization" della laurea magistrale in informatica.
  
 
 Hanno contribuito a questo progetto:
