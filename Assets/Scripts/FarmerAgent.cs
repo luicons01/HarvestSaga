@@ -402,7 +402,7 @@ public class FarmerAgent : Agent
                     AddReward(0.02f + alignmentBonus);
                 }
 
-                // Se il grano è nullo passa al prossimo PER SICUREZZA TENERE D'OCCHIO DURANTE IL TRAINING
+                // Se il grano è nullo passa al prossimo 
                 if (!wheat.IsWheatActive())
                 {
                     UpdateNearestWheat();
@@ -441,7 +441,7 @@ public class FarmerAgent : Agent
 
     private void FixedUpdate()
     {
-        // Avoids scenario where nearest flower nectar is stolen by opponent and not updated
+        
         if (nearestWheat != null && !nearestWheat.IsWheatActive())
             UpdateNearestWheat();
     }
